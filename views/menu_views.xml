@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+            id="root_menu"
+            name="Open Academy (OA)"
+            web_icon="openacademy,static/description/icon.png"
+    />
+
+    <menuitem
+            id="course_menu"
+            name="Courses"
+            parent="oa.root_menu"
+            sequence="10"
+    />
+
+    <menuitem
+            id="course_menu_action"
+            name="Courses"
+            parent="oa.course_menu"
+            sequence="10"
+            action="course_action"
+    />
+
+    <menuitem
+            id="session_menu_action"
+            name="Sessions"
+            parent="oa.course_menu"
+            sequence="20"
+            action="session_action"
+    />
+
+    <menuitem
+            id="configuration_menu"
+            name="Configuration"
+            parent="oa.root_menu"
+            sequence="99"
+    />
+    <menuitem
+            id="partner_menu_action"
+            name="Contacts"
+            parent="oa.configuration_menu"
+            sequence="10"
+            action="partner_action"
+    />
+
+</odoo>

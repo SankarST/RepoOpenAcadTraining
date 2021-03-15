@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+oa_course_manager,OA Course Manager,model_oa_course,,1,1,1,1
+oa_session_manager,OA Session Manager,model_oa_session,,1,1,1,1
