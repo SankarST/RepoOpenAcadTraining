@@ -48,12 +48,6 @@ class Course(models.Model):
 
 
 class Session(models.Model):
-    @api.onchange('seats', 'attendee_ids')
-    def _verify_valid_seats(self):
-        if self.seats < 0:
-            return self._warning("Incorrect 'seats' value", "The number of available seats may not be negative")
-        if self.seats < len(self.attendee_ids):
-            return self._warning("Too many attendees", "Increase seats or remove excess attendees")
     _name = 'oa.session'
     _inherit = ['mail.thread']
     _order = 'name'
