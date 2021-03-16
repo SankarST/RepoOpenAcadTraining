@@ -33,6 +33,7 @@
         "views/partner_views.xml",
 
         "views/menu_views.xml",
+        "wizard/add_attendee_views.xml",
         "data/oa_data.xml",
     ],
     # only loaded in demonstration mode
