@@ -21,14 +21,17 @@
     'version':     '0.1',
 
     # any module necessary for this one to work correctly
-    'depends':     ['base'],
+    'depends':     ['base','mail'],
 
     # always loaded
     'data':        [
         "security/ir.model.access.csv",
+
         "views/course_views.xml",
         "views/session_views.xml",
+
         "views/partner_views.xml",
+
         "views/menu_views.xml",
         "data/oa_data.xml",
     ],

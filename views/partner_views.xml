@@ -19,7 +19,7 @@
         </field>
     </record>
 
-    <record id="partner_view_form" model="ir.ui.view">
+<!--    <record id="partner_view_form" model="ir.ui.view">
         <field name="name">oa.partner.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
@@ -36,6 +36,25 @@
             </page>
         </field>
     </record>
+-->
+
+    <record id="partner_view_form" model="ir.ui.view">
+        <field name="name">oa.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Sessions">
+                    <group>
+                        <field name="instructor"/>
+                        <field name="level"/>
+                        <field name="session_ids"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
 
     <record id="partner_view_search" model="ir.ui.view">
         <field name="name">oa.partner.search</field>
@@ -51,6 +70,12 @@
     <record id="partner_action" model="ir.actions.act_window">
         <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+   <record id="partner_category_action" model="ir.actions.act_window">
+        <field name="name">Contact Tags</field>
+        <field name="res_model">res.partner.category</field>
         <field name="view_mode">tree,form</field>
     </record>
 
