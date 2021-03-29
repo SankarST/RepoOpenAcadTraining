@@ -11,6 +11,9 @@ class Course(models.Model):
     description = fields.Text()
 
     responsible_id = fields.Many2one('res.users', string="Responsible", help="Need not be the Instructor")
+    can_edit_responsible = fields.Boolean(compute='_compute_can_edit_responsible')
+
+
     session_ids = fields.One2many('oa.session', 'course_id', string="Sessions")
 
     level = fields.Selection([('1', 'Easy'), ('2', 'Medium'), ('3', 'Hard')], string="Difficulty Level")
@@ -26,6 +29,12 @@ class Course(models.Model):
          'UNIQUE(name)',
          "The course title must be unique"),
     ]
+
+
+
+    @api.depends('responsible_id')
+    def _compute_can_edit_responsible(self):
+        self.can_edit_responsible = self.env.user.has_group('oa.group_archmaesters')
 
 
     def copy(self, default=None):

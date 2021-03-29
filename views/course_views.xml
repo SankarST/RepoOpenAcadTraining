@@ -40,8 +40,11 @@
                     </div>
                     <group>
 			<field name="attendee_count"/>
-                        <field name="responsible_id"/>
-                        <field name="level"/>
+                        <field name="can_edit_responsible" invisible="1"/>
+                        <field name="responsible_id" attrs="{'readonly': [('can_edit_responsible', '=', False)]}"/>
+
+<!--                        <field name="responsible_id"/>
+    -->                    <field name="level"/>
                     </group>
                     <notebook>
                         <page string="Description" name="desc">

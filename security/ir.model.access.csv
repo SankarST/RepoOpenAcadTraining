@@ -1,3 +1,8 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-oa_course_manager,OA Course Manager,model_oa_course,,1,1,1,1
-oa_session_manager,OA Session Manager,model_oa_session,,1,1,1,1
+course_manager,OA Course Manager,model_oa_course,group_maesters,1,1,1,1
+session_manager,OA Session Manager,model_oa_session,group_maesters,1,1,1,1
+course_read_all,OA Course All,model_oa_course,group_apprentices,1,0,0,0
+session_read_all,OA Session All,model_oa_session,group_apprentices,1,0,0,0
+course_read_public,OA Course All,model_oa_course,,1,0,0,0
+session_read_public,OA Session All,model_oa_session,,1,0,0,0
+partner_read_public,OA Course All,model_res_partner,,1,0,0,0
