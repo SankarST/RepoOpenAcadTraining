@@ -96,10 +96,35 @@
         </field>
     </record>
 
+        <record model="ir.ui.view" id="oa_session_graph_view">
+            <field name="name">oa.session.graph</field>
+            <field name="model">oa.session</field>
+            <field name="arch" type="xml">
+                <graph string="Participations by Courses">
+                    <field name="course_id"/>
+                    <field name="attendees_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+
+
+	<!-- calendar view -->
+	<record model="ir.ui.view" id="oa_session_calendar_view">
+	    <field name="name">oa.session.calendar</field>
+	    <field name="model">oa.session</field>
+	    <field name="arch" type="xml">
+	        <calendar string="Session Calendar" date_start="start_date" date_stop="end_date" color="instructor_id">
+	            <field name="name"/>
+	        </calendar>
+	    </field>
+	</record>
+
+
     <record id="session_action" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">oa.session</field>
-        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_mode">tree,form,pivot,calendar</field>
     </record>
 </odoo>
 

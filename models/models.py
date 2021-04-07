@@ -23,7 +23,7 @@ class Course(models.Model):
     level = fields.Selection([('1', 'Easy'), ('2', 'Medium'), ('3', 'Hard')], string="Difficulty Level")
     session_count = fields.Integer(compute="_compute_session_count")
     attendee_count = fields.Integer(compute="_compute_attendee_count")
-
+    color = fields.Integer()
 
     fname = fields.Char('Filename')
     datas = fields.Binary('File')

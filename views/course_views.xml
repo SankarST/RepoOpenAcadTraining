@@ -96,6 +96,6 @@
     <record id="course_action" model="ir.actions.act_window">
         <field name="name">Courses</field>
         <field name="res_model">oa.course</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 </odoo>
