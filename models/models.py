@@ -7,10 +7,11 @@ from odoo import fields, models ,api ,exceptions
 _logger = logging.getLogger(__name__)
 
 class Course(models.Model):
-    _name = 'oa.course'
-    _description = 'Course OA'
-    _inherit = 'mail.thread'
+#    _name = 'oa.course'
+#    _description = 'Course OA'
+#    _inherit = 'mail.thread'
     
+    _inherit = 'product.template'
     name = fields.Char(string='Title', required=True)
     description = fields.Text()
 
@@ -103,7 +104,9 @@ class Session(models.Model):
     duration = fields.Float(digits=(6, 2), help="Duration in days", default=1)
 
     instructor_id = fields.Many2one('res.partner', string="Instructor")
-    course_id = fields.Many2one('oa.course', ondelete='cascade', string="Course", required=True)
+#    course_id = fields.Many2one('oa.course', ondelete='cascade', string="Course", required=True)
+    course_id = fields.Many2one('product.template', ondelete='cascade', string="Course" ,required=True)
+
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     attendees_count = fields.Integer(compute='_get_attendees_count', store=True)
 
@@ -114,7 +117,9 @@ class Session(models.Model):
 
 
     is_paid = fields.Boolean('Is paid')
-    product_id = fields.Many2one('product.template', 'Product')
+
+#    image_1920 = fields.Image(related=course_id.image)
+                  
 
 
     def _warning(self, title, message):
@@ -204,6 +209,7 @@ class Session(models.Model):
 
     @api.model
     def create(self, vals):
+        logging.warning('##---------- --------------- Test %s ' % str(self.course_id.product_id) )
         res = super(Session, self).create(vals)
         res._auto_transition()
         if vals.get('instructor_id'):
@@ -233,15 +239,22 @@ class Session(models.Model):
         expense_account = self.env['account.account'].search([('user_type_id', '=', self.env.ref('account.data_account_type_expenses').id)], limit=1)
 
         logging.warning('##------------At line  4 %s '  % str(expense_account.id) )
-
-        self.env['account.move.line'].create({
+#        logging.warning('##------------At line  5 %s '  % str(product_id.id) )
+        product_id = self.env['product.product'].sudo().search([('product_tmpl_id', '=' ,self.course_id.id)] , limit=1)
+        logging.warning('##------------At line  66 %s '  % str(product_id.id) )
+        
+        move_line = self.env['account.move.line'].create({
             'move_id': teacher_invoice.id,
-            'product_id': self.product_id.id,
-            'price_unit': self.product_id.lst_price,
+            'product_id': product_id.id,
+            'price_unit': product_id.lst_price,
             'account_id': expense_account.id,
             'name':       'Session',
             'quantity':   1,
+#	    'debit' : self.course_id.lst_price ,	
+#	    'credit' : self.course_id.lst_price	
         })
+
+        logging.info('##--------------At line 67 %s '  , move_line) 
 
         self.write({'is_paid': True})
 

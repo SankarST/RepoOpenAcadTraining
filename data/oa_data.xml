@@ -57,14 +57,15 @@
         <field name="name">Arya Stark</field>
     </record>
 
-    <record id="course_dragon_technical" model="oa.course">
+    <record id="course_dragon_technical" model="product.template">
         <field name="name">Dragon Technical Training</field>
         <field name="description">You will learn how to train your dragon theroycally</field>
         <field name="responsible_id" ref="user_daenerys"/>
         <field name="level">1</field>
+
     </record>
 
-    <record id="course_dragon_functional" model="oa.course">
+    <record id="course_dragon_functional" model="product.template">
         <field name="name">Dragon Functional Training</field>
         <field name="description">You will learn how to train your dragon practically</field>
         <field name="responsible_id" ref="user_ned"/>

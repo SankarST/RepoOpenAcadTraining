@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+	<template id="course_search" name="Course Search Box">
+		<form action="/courses">
+			<t t-call="website.website_search_box">
+				<t t-set="action" t-value="'/customers'"/>
+			</t>
+		</form>
+	</template>
+
+
+</odoo>
+		

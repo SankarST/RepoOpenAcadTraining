@@ -2,7 +2,7 @@
 <odoo>
     <record id="course_view_list" model="ir.ui.view">
         <field name="name">oa.course.tree</field>
-        <field name="model">oa.course</field>
+        <field name="model">product.template</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -14,7 +14,7 @@
 
     <record id="course_view_form" model="ir.ui.view">
         <field name="name">oa.course.form</field>
-        <field name="model">oa.course</field>
+        <field name="model">product.template</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -38,6 +38,12 @@
                             <field name="name"/>
                         </h1>
                     </div>
+		    <div class="row">
+                            <div class="col">
+			        <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
+                                <!--field name="image_1920" widget="image"/-->
+                            </div>
+		    </div>
                     <group>
 			<field name="attendee_count"/>
                         <field name="can_edit_responsible" invisible="1"/>
@@ -47,6 +53,7 @@
  -->                    <field name="level"/>
                         <field name="currency_id"/>
 
+                        
                         <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                     </group>
                     <notebook>
@@ -75,7 +82,7 @@
         </field>
     </record>
 
-    <record id="course_view_search" model="ir.ui.view">
+    <!--record id="course_view_search" model="ir.ui.view">
         <field name="name">oa.course.search</field>
         <field name="model">oa.course</field>
         <field name="arch" type="xml">
@@ -89,13 +96,29 @@
                         context="{'group_by': 'responsible_id'}"/>
             </search>
         </field>
-    </record>
+    </record-->
 
 
 
     <record id="course_action" model="ir.actions.act_window">
         <field name="name">Courses</field>
-        <field name="res_model">oa.course</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+<!-- removed kanban -->
     </record>
+
+   <record id="course_action_view_tree" model="ir.actions.act_window.view">
+        <field name="view_mode">tree</field>
+        <field name="sequence" eval="10"/>
+        <field name="view_id" ref="oa.course_view_list"/>
+        <field name="act_window_id" ref="oa.course_action"/>
+    </record>
+
+    <record id="course_action_view_form" model="ir.actions.act_window.view">
+        <field name="view_mode">form</field>
+        <field name="sequence" eval="20"/>
+        <field name="view_id" ref="oa.course_view_form"/>
+        <field name="act_window_id" ref="oa.course_action"/>
+    </record>
+
 </odoo>

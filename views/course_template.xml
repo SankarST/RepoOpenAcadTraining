@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   
+   <record id="menu_course_avail" model="website.menu">
+        <field name="name">OA Courses</field>
+        <field name="url">/courses</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">75</field>
+    </record>
+   
+
+    <!--template id="course_search" name="Course Search Box">
+		<form action="/courses">
+			<t t-call="website_search_box">
+				<t t-set="action" t-value="'/customers'"/>
+			</t>
+		</form>
+	</template-->
+
+	<template id="course" name="Course">
+		<t t-call="website.layout">
+			<div class="courses_pager form-inline justify-content-center py-3">
+				<t t-call="oa.course_search"/>
+				<t t-call="website.pager"/>
+		    </div>
+
+			<div class="col-nd-4" style="margin: 10px;">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/courses">Courses</a>
+					</li>
+				
+				</ol>
+			</div>
+
+			<div class="col-lg-12 row">
+
+				<div t-if="enable_groups" id="div_course_groups" class="col-lg-3"/>	
+				<div id="main_div" t-attf-class="row #{'col-lg-9' if enable_groups else 'col-lg-12'}">
+					<t t-foreach="courses" t-as="cour">
+						<!--t t-if="course.responsible_id = True"-->
+						<div class="col-3" style="width: 250px !important;height: 250px !important;">
+							<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+							
+							<a t-att-href="'/courses/details/%d' %(cour.id)" itemprop="url">
+                                                             
+ 							        <div class="text-center">
+									<t t-if="cour.image_1920"> 
+                                        	                        <span>
+									     <img t-att-src="image_data_uri(cour.sudo().image_1920)" class="img o_image_128_max rounded" t-att-alt="cour.name"/>
+                                                	                </span>
+									</t>
+									<t t-else="">
+										<span> Image not found </span>
+									</t>
+								</div>
+
+<!--span t-if="line.is_reward_line and line.sudo().product_id.image_128"-->
+
+								<!--div>
+									<span t-if="cour.image_1920">
+	
+									<img style="width: 250px; height: 250px;border-radius: 20px;"
+									t-att-src="image_data_uri(cour.sudo().image_1920)" t-att-alt="cour.name"/>
+									</span>
+								</div-->
+
+								
+								<!--span t-field="cour.sudo().image_1920"
+									  t-options="{'widget' : 'image', 'preview_image' : 'image_1928'}"
+									  class="d-flex h-100 justify-content-center align-items-center"/-->
+								<!--span> 
+                                                                          <img  t-attr-src="iage_data_url(cour.sudo().image_1920)"
+									  t-options="{'widget' : 'image', 'preview_image' : 'image_1928'}"
+									  class="d-flex h-100 justify-content-center align-items-center"/>
+								</span-->
+								<div class="text-center" style="font-size: 20px;">
+									<span t-esc="cour.name"/>
+								</div>
+								<div class="text-center" style="font-size: 15px;">
+									<span t-esc="cour.currency_id.name"/>
+									<span t-esc="cour.lst_price"/>
+								</div>
+							</a>
+						</div>
+						<!--/t-->
+					</t>
+				
+				</div>
+			</div>
+			<div style="margin-top: 100px !important;" class="courses_pager form-inline justify-content-center mt-3">
+				<t t-call="website.pager"/>
+			</div>
+		</t>
+	</template>
+
+	<template id="course_details" name="course">
+		<t t-call="website.layout">
+			<div class="col-nd-4" style="margin: 10px;">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/courses">Courses</a>
+					</li>
+					<!--li t-if="category" class="breadcrumb-item">
+						<a t-att-href="keep-->
+					<li class="breadcrumb-item active">
+						<span t-field="course.name"/>
+					</li>
+				</ol>
+			</div>
+			<div class="col-12 row">
+				<div class="col-8 text-center" style="margin-top: 30px;">
+					<!--img style="width: 250px; height: 250px;border-radius: 20px;"
+						t-att-src="'web/image/product.template/%s/image_1920' %(course.id)" alt="Image not found"/-->
+
+					<!--img style="width: 250px; height: 250px;border-radius: 20px;"
+						t-att-src="image_data_uri(course.sudo().image_1920)" alt="Image not found"/-->
+					<t t-if="course.image_1920"> 
+		                                <img t-att-src="image_data_uri(course.sudo().image_1920)" class="img o_image_128_max rounded" t-att-alt="course.name"/>
+					</t>
+					<t t-else="">
+						<span> Image not found </span>
+					</t>
+					<br/>
+					<div style="height: 20x;">
+					</div>
+					<div>
+						<div>
+							<span t-field="course.description"/>
+						</div>
+						<div class="text-center" >
+							<b> Available Sessions	</b>
+						</div>
+						<t t-if="len(course.session_ids)>0">
+						<div class="text-center">
+							<table>
+							
+							<t t-foreach="course.session_ids" t-as="sess">
+								<tr>
+									<td style="width: 400px;"/>
+									<td>
+										<li class="text-left">
+											<!--a t-att-href="'/session/details/%s' % slug(sess)" itemprop="url"-->
+											<a t-att-href="'/session/details/%d' %(sess.id)" itemprop="url">
+						
+				                            					<t t-esc="sess.name"/>
+											</a>
+										</li>
+									</td>
+								</tr>
+							</t>
+							</table>
+						</div>
+						</t>
+						<t t-else="">
+							<span> To be announced shortly </span>
+						</t>
+					</div>
+				
+				</div>
+				<div class="col-4 pull-left" style="margin-top: 32px;">
+					<h4 class="nb-1">
+						<p>Level : <t t-if="course.level in  '1'"> Easy </t>
+								   <t t-if="course.level in '2'"> Medium </t>
+								   <t t-if="course.level in '3'"> Hard </t>
+							 <br/>
+						</p>
+						
+						<p>Price : <t t-esc="course.currency_id.symbol"/> <t t-esc="course.list_price"/></p>
+					</h4>
+				</div>
+
+				<br/>
+				
+			</div>
+		</t>
+	</template>
+
+	<template id="session_details" name="session">
+		<t t-call="website.layout">
+			<div class="col-nd-4" style="margin: 10px;">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/courses">Courses</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a t-att-href="'/courses/details/%d' % (session.course_id)" itemprop="url"> <t t-esc="session.course_id.name"/>  </a>
+					</li>
+					<li class="breadcrumb-item active">
+						<span t-field="session.name"/>
+					</li>
+				</ol>
+			</div>
+			<div class="col-12 row">
+				<div class="col-8 text-center" style="margin-top: 30px;">
+					<!--img style="width: 250px; height: 250px;border-radius: 20px;"
+						t-att-src="'web/image/product.template/%s/image_1920' % session.course_id.id" /--> <!--alt="Image"/-->
+
+					<img style="width: 250px; height: 250px;border-radius: 20px;"
+						t-att-src="image_data_uri(session.course_id.image_1920)" alt="Image not found"/>
+
+
+					<br/>
+					<div style="height: 20x;">
+					</div>
+					<div>
+						<div>
+							<span t-field="session.course_id.description"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-4 pull-left" style="margin-top: 32px;">
+					<h4 class="nb-1">
+						<p>Level : <t t-if="session.course_id.level in '1'"> Easy </t>
+								   <t t-if="session.course_id.level in '2'"> Medium </t>
+								   <t t-if="session.course_id.level in '3'"> Hard </t>
+							 <br/>
+						</p>
+						
+						<p>Price : <t t-esc="session.course_id.currency_id.symbol"/> <t t-esc="session.course_id.list_price"/></p>
+					</h4>
+					<table > <!--class="table table-bordered"-->
+	                	<tr>
+	                        <td>Start Date : </td>
+							<td style="width: 10px;"></td>
+							<td>
+								<span t-field="session.start_date"/>
+							</td>
+	                   	</tr>
+						<tr>
+	                        <td>End Date : </td>
+							<td style="width: 10px;"/>
+							<td > <span t-field="session.end_date"/> </td>
+	                   	</tr>
+						<tr>
+	                        <td>Duration : </td>
+							<td style="width: 10px;"/>
+							<td ><p> <span t-field="session.duration"/>	Day(s)</p></td>
+	                   	</tr>
+						<tr>
+					        <td>Seats : </td>
+							<td style="width: 10px;"/>
+							<td > <span t-field="session.seats" /> </td>
+	                   </tr>
+					
+	        	    </table>							
+
+				</div>
+
+				
+			</div>
+
+		</t>
+	</template>
+
+
+</odoo>
+		

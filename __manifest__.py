@@ -21,7 +21,7 @@
     'version':     '0.1',
 
     # any module necessary for this one to work correctly
-    'depends':     ['base','mail','product','account','board'],
+    'depends':     ['base','mail','account','board','website_sale'],
 
     # always loaded
     'data':        [
@@ -29,13 +29,16 @@
         "security/ir.model.access.csv",
 
         "views/course_views.xml",
-        "views/course_kanban.xml",
+ #       "views/course_kanban.xml",
         "views/session_views.xml",
 
         "views/partner_views.xml",
 
         "views/menu_views.xml",
-        "views/board.xml",        
+        "views/search.xml", 
+ #       "views/board.xml",        
+        "views/course_template.xml",
+       
         "wizard/add_attendee_views.xml",
         "report/session.xml",
 
