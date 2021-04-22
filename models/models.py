@@ -209,7 +209,7 @@ class Session(models.Model):
 
     @api.model
     def create(self, vals):
-        logging.warning('##---------- --------------- Test %s ' % str(self.course_id.product_id) )
+        logging.warning('##---------- --------------- Test %s ' % str(self.course_id) )
         res = super(Session, self).create(vals)
         res._auto_transition()
         if vals.get('instructor_id'):
