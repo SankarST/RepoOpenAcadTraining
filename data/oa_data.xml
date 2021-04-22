@@ -62,13 +62,14 @@
         <field name="description">You will learn how to train your dragon theroycally</field>
         <field name="responsible_id" ref="user_daenerys"/>
         <field name="level">1</field>
-
+	<field name="is_course">True</field>
     </record>
 
     <record id="course_dragon_functional" model="product.template">
         <field name="name">Dragon Functional Training</field>
         <field name="description">You will learn how to train your dragon practically</field>
         <field name="responsible_id" ref="user_ned"/>
+	<field name="is_course">True</field>
         <field name="level">3</field>
     </record>
 

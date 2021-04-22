@@ -82,28 +82,31 @@
         </field>
     </record>
 
-    <!--record id="course_view_search" model="ir.ui.view">
+    <record id="course_view_search" model="ir.ui.view">
         <field name="name">oa.course.search</field>
-        <field name="model">oa.course</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
                 <field name="responsible_id"/>
-                <field name="description"/>
+                <!--field name="description"/-->
                 <filter name="my_courses" string="My Courses"
                         domain="[('responsible_id', '=', uid)]"/>
                 <filter name="by_responsible" string="Responsible"
                         context="{'group_by': 'responsible_id'}"/>
             </search>
         </field>
-    </record-->
+    </record>
 
 
 
     <record id="course_action" model="ir.actions.act_window">
         <field name="name">Courses</field>
         <field name="res_model">product.template</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('is_course','=',True)]</field>
+         <field name="view_mode">tree,form,kanban</field>
     </record>
 
    <record id="course_action_view_tree" model="ir.actions.act_window.view">

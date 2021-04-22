@@ -18,7 +18,7 @@ class OA(http.Controller):
         '''/courses/page/<int:page>'''
     ], type='http', auth='public', website=True)
     def course(self, page=0 , search=''):
-        domain = [('name','like','Training')]		
+        domain = [('is_course','=',True)]		
 
         if search:
             domain = [('name', 'ilike' ,search)]

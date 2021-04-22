@@ -15,10 +15,10 @@ class Course(models.Model):
     name = fields.Char(string='Title', required=True)
     description = fields.Text()
 
-    responsible_id = fields.Many2one('res.users', string="Responsible", help="Need not be the Instructor")
+    responsible_id = fields.Many2one('res.users', string="Responsible", help="Need not be the Instructor", index=True, store=True)
     can_edit_responsible = fields.Boolean(compute='_compute_can_edit_responsible')
 
-
+    is_course = fields.Boolean(string="Is OA Course" , default = False)
     session_ids = fields.One2many('oa.session', 'course_id', string="Sessions")
 
     level = fields.Selection([('1', 'Easy'), ('2', 'Medium'), ('3', 'Hard')], string="Difficulty Level")
@@ -30,7 +30,7 @@ class Course(models.Model):
     datas = fields.Binary('File')
     currency_id = fields.Many2one('res.currency', 'Currency')
 
-    price = fields.Float('Price')
+    price = fields.Float('Price', related='list_price')
 
     _sql_constraints = [
         ('name_description_check',
