@@ -105,7 +105,7 @@ class Session(models.Model):
 
     instructor_id = fields.Many2one('res.partner', string="Instructor")
 #    course_id = fields.Many2one('oa.course', ondelete='cascade', string="Course", required=True)
-    course_id = fields.Many2one('product.template', ondelete='cascade', string="Course" ,required=True)
+    course_id = fields.Many2one('product.template', ondelete='cascade', string="Course" ,required=True , domain=[('is_course','=',True)])
 
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     attendees_count = fields.Integer(compute='_get_attendees_count', store=True)
@@ -117,8 +117,7 @@ class Session(models.Model):
 
 
     is_paid = fields.Boolean('Is paid')
-
-#    image_1920 = fields.Image(related=course_id.image)
+#    product_id = fields.Many2one('product.template', 'Product')
                   
 
 
