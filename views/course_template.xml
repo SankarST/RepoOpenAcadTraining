@@ -195,11 +195,15 @@
 				<div class="col-8 text-center" style="margin-top: 30px;">
 					<!--img style="width: 250px; height: 250px;border-radius: 20px;"
 						t-att-src="'web/image/product.template/%s/image_1920' % session.course_id.id" /--> <!--alt="Image"/-->
+					<t t-if="session.course_id.image_1920"> 
+						<img style="width: 250px; height: 250px;border-radius: 20px;"
+							t-att-src="image_data_uri(session.course_id.image_1920)" alt="Image not found"/>
+			
+					</t>
+					<t t-else="">
+						<span> Image not found </span>
 
-					<img style="width: 250px; height: 250px;border-radius: 20px;"
-						t-att-src="image_data_uri(session.course_id.image_1920)" alt="Image not found"/>
-
-
+					</t>
 					<br/>
 					<div style="height: 20x;">
 					</div>
