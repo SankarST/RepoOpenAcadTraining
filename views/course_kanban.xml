@@ -15,7 +15,7 @@
 
       <record model="ir.ui.view" id="oa.course_view_kaban">
         <field name="name">oa.course_view_kaban</field>
-        <field name="model">oa.course</field>
+        <field name="model">product.template</field>
         <field name="arch" type="xml">
             <kanban class="oe_background_grey o_kanban_dashboard o_project_kanban">
                 <field name="name"/>
