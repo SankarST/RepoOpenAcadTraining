@@ -47,5 +47,17 @@
                 [(1, '=', 1)]
             </field>
         </record>
-    </data>
+
+        <record id="access_only_masters_can_filter" model="ir.model.access">
+            <field name="name">Only Maesters Can Filter</field>
+            <field name="model_id" ref="base.model_ir_property"/>
+            <field name="group_id" ref="oa.group_maesters"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record> 
+
+
+   </data>
 </odoo>
