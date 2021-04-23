@@ -18,6 +18,7 @@ class Course(models.Model):
     responsible_id = fields.Many2one('res.users', string="Responsible", help="Need not be the Instructor", index=True, store=True)
     can_edit_responsible = fields.Boolean(compute='_compute_can_edit_responsible')
 
+    responsible = fields.Many2one(related='responsible_id',store=True)
     is_course = fields.Boolean(string="Is OA Course" , default = False)
     session_ids = fields.One2many('oa.session', 'course_id', string="Sessions")
 
