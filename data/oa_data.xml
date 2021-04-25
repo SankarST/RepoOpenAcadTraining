@@ -28,12 +28,15 @@
         <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
         <field name="signature"><![CDATA[<span>-- <br/>
 	Daenerys Targaryan</span>]]></field>
+	<field name="groups_id" eval="[(4,ref('oa.group_maesters'))]"/>
+
     </record>
 
     <record id="partner_tyrion" model="res.partner">
         <field name="name">Tyrion Lannister</field>
         <field name="email">tyrion@openacademy.org</field>
         <field name="instructor" eval="True"/>
+	
     </record>
 
     <record id="partner_ned" model="res.partner">
@@ -51,6 +54,7 @@
         <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
         <field name="signature"><![CDATA[<span>-- <br/>
 	Ned Stark</span>]]></field>
+	<field name="groups_id" eval="[(4,ref('oa.group_maesters'))]"/>
     </record>
 
     <record id="partner_arya" model="res.partner">
