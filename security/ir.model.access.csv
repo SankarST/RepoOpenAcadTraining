@@ -1,6 +1,7 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 course_manager,OA Course Manager,model_product_template,group_maesters,1,1,1,1
 session_manager,OA Session Manager,model_oa_session,group_maesters,1,1,1,1
+wizard_manager,OA wizard session manager,model_add_attendee_wizard,group_maesters,1,1,1,1
 course_read_all,OA Course All,model_product_template,group_apprentices,1,0,0,0
 session_read_all,OA Session All,model_oa_session,group_apprentices,1,0,0,0
 course_read_public,OA Course Public,model_product_template,,1,0,0,0
