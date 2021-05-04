@@ -3,8 +3,8 @@ import xmlrpc.client
 HOST = 'localhost'
 PORT = 8069
 DB = 'DB1'
-USER = 'sankar.sthillai@gmail.com'
-PASS = 'Password123!'
+USER =  'admin'
+PASS = 'admin'
 ROOT = 'http://%s:%d/xmlrpc/' % (HOST,PORT)
 
 # 1. Login
@@ -32,7 +32,7 @@ course_id = call('product.template', 'search', [('name','ilike','Dragon Function
 print("check " )
 print(course_id)
 session_id = call('oa.session', 'create', { #will work only for Maesters and Achmaesters
-    'name' : 'My session2',
+    'name' : 'My session4',
     'course_id' : course_id,
 })
 
